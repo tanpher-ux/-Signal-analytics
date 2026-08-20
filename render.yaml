@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: signal-analytics-server
+    runtime: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && node index.js
+    disk:
+      name: signal-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: DB_PATH
+        value: /data/analytics.db
+      - key: PORT
+        value: 4000
